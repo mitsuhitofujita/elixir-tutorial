@@ -1,0 +1,14 @@
+FROM elixir:1.14.2
+
+ENV DEBIAN_FRONTEND noninteractive
+
+ARG ELIXIR_DIR=/elixir
+ARG ELIXIR_GID=1000
+ARG ELIXIR_GROUP=vscode
+ARG ELIXIR_HOME=/home/vscode
+ARG ELIXIR_UID=1000
+ARG ELIXIR_USER=vscode
+RUN groupadd -g ${ELIXIR_GID} ${ELIXIR_GROUP} && \
+    useradd -g ${ELIXIR_GROUP} -u ${ELIXIR_UID} -d ${ELIXIR_HOME} -m ${ELIXIR_USER} && \
+    mkdir -p ${ELIXIR_DIR} && \
+    chown ${ELIXIR_UID}:${ELIXIR_GID} ${ELIXIR_DIR}
