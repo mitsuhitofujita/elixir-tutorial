@@ -19,3 +19,10 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/api_request>.
 
+```
+mix new api_request
+mv api_request 02_api_request
+mix deps.get
+mix run -e "IO.inspect ApiRequest.hello"
+```
+
