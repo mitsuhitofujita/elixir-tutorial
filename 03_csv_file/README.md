@@ -23,5 +23,6 @@ be found at <https://hexdocs.pm/csv_file>.
 mix new csv_file
 mv csv_file 03_csv_file
 mix deps.get
-mix run -e "IO.inspect CsvFile.hello"
+mix run -e "IO.inspect CsvFile.read"
+mix test
 ```
