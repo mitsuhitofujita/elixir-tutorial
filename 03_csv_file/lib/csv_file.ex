@@ -3,23 +3,30 @@ defmodule CsvFile do
   Documentation for `CsvFile`.
   """
 
-  def process do
+  def read do
     "data.csv"
     |> File.stream!()
+    |> chunk(5)
+  end
+
+  def chunk(stream, count) do
+    stream
     |> CSV.decode!()
-    |> Stream.map(&filter(&1))
-    |> Stream.chunk_every(3)
-    |> Stream.each(&print(&1))
-    |> Enum.to_list()
+    |> Stream.map(&filter/1)
+    |> Stream.chunk_every(count)
+    |> Enum.each(&print/1)
   end
 
   defp filter(values) do
-    IO.inspect("filter")
     values
   end
 
-  defp print(values) do
-    IO.inspect(values)
-    Process.sleep(1000)
+  defp print(lines) do
+    IO.puts(Enum.count(lines))
+
+    lines
+    |> Enum.map(fn values -> Enum.join(values, "|") end)
+    |> Enum.join("\n")
+    |> IO.puts()
   end
 end
