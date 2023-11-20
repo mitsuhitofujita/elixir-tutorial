@@ -1,11 +1,14 @@
-FROM elixir:1.14.2
+FROM elixir:1.15.7
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV LANG="C.UTF-8"
 
-ARG ELIXIR_GID=1000
-ARG ELIXIR_GROUP=vscode
-ARG ELIXIR_HOME=/home/vscode
-ARG ELIXIR_UID=1000
-ARG ELIXIR_USER=vscode
-RUN groupadd -g ${ELIXIR_GID} ${ELIXIR_GROUP} && \
-    useradd -g ${ELIXIR_GROUP} -u ${ELIXIR_UID} -d ${ELIXIR_HOME} -m ${ELIXIR_USER}
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        git \
+        inotify-tools \
+        sqlite3 && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+	rm -rf /var/lib/apt/lists/*

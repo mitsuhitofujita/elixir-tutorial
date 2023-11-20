@@ -1,19 +1,37 @@
 {
-    "name": "Elixir",
+    "name": "elixir",
     "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
+        "dockerfile": "./Dockerfile",
+        "context": "."
     },
-    "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "username": "vscode",
+            "userUid": "1000",
+            "userGid": "1000"
+        }
     },
-    "appPort": [],
-    "postCreateCommand": "",
+    "overrideFeatureInstallOrder": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
     "remoteUser": "vscode",
-    "extensions": [
-        "editorconfig.editorconfig",
-        "github.vscode-pull-request-github",
-        "jakebecker.elixir-ls",
-        "redhat.vscode-yaml"
-    ]
+    "containerUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "jakebecker.elixir-ls",
+                "phoenixframework.phoenix",
+                "esbenp.prettier-vscode",
+                "redhat.vscode-yaml"
+            ]
+        }
+    }
 }
